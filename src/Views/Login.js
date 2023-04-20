@@ -6,6 +6,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null); // Add state for error handling
+  console.log(localStorage.getItem('username'));
 
   const emailHandler = (event) => {
     setEmail(event.target.value);
@@ -33,6 +34,7 @@ export default function Login() {
           localStorage.setItem('token', data.token);
           localStorage.setItem('userId', data.id);
           localStorage.setItem('username', data.username);
+          window.location.reload();
           navigate('/');
         } else {
           setError('Invalid email or password'); // Set error message when token is not present in response

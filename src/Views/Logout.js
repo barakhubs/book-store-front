@@ -10,6 +10,7 @@ function Logout() {
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
     // Redirect to login page after logout
+    window.location.reload();
     navigate("/login");
   }, [navigate]);
 
