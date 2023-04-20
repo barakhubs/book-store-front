@@ -27,8 +27,8 @@ const BooksList = () => {
 
 
     async function handleAddToCart(bookId) {
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
+        const token = localStorage.getItem('token');
+        if (!token) {
             // If userId is null, display a message asking the user to log in
             alert('Please log in first');
             navigate('/login');
@@ -51,7 +51,6 @@ const BooksList = () => {
             });
             if (response.ok) {
                 console.log("Book added to cart successfully!");
-                console.log(userId);
             } else {
                 throw new Error('Failed to add book to cart');
             }

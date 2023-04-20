@@ -32,6 +32,7 @@ export default function Login() {
         if (data.token) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('userId', data.id);
+          localStorage.setItem('username', data.username);
           navigate('/');
         } else {
           setError('Invalid email or password'); // Set error message when token is not present in response

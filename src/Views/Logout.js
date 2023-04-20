@@ -7,6 +7,8 @@ function Logout() {
   useEffect(() => {
     // Perform logout logic here, such as clearing token from localStorage
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
     // Redirect to login page after logout
     navigate("/login");
   }, [navigate]);
