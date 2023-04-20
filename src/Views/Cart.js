@@ -78,7 +78,7 @@ const CartList = () => {
                 },
                 body: JSON.stringify({
                     user_id: userId,
-                    cart_id: cart.id,
+                    book_id: cart.book_id,
                     status: "processing"
                 }),
             });
@@ -95,7 +95,7 @@ const CartList = () => {
         if (allResponsesOk) {
             // If order creation is successful, redirect to order success page
             window.alert("Successfully placed an order!");
-            console.log(responses);
+            window.location.reload();
         } else {
             // If order creation fails, show an error message
             const errorResponses = responses.filter(response => !response.ok);
