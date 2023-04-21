@@ -95,6 +95,9 @@ const CartList = () => {
         if (allResponsesOk) {
             // If order creation is successful, redirect to order success page
             window.alert("Successfully placed an order!");
+            // set total cart to 0
+            localStorage.setItem("cartsTotal", 0);
+
             window.location.reload();
         } else {
             // If order creation fails, show an error message
@@ -178,7 +181,7 @@ const CartList = () => {
                 <div className="items-center justify-center p-12">
                     <div className="flex h-full flex-col bg-white shadow-xl">
                         <div className="flex-1 px-4 py-6 sm:px-6">
-                            <div className="flex items-start justify-between">
+                            <div className="flex items-start justify-center">
                                 <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">No item in cart</h2>
                             </div>
                         </div>

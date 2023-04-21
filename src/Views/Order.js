@@ -110,7 +110,7 @@ const OrderList = () => {
                 <div class="items-center justify-center p-12">
                     <div class="flex h-full flex-col bg-white shadow-xl">
                         <div class="flex-1 px-4 py-6 sm:px-6">
-                            <div class="flex items-start justify-between">
+                            <div class="flex items-start justify-center">
                                 <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">No item in order</h2>
                             </div>
                         </div>

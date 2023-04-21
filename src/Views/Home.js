@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Header from '../Components/Header';
+import AddtoCart from '../Components/AddToCart';
 
 const BooksList = () => {
     const navigate = useNavigate();
@@ -28,44 +30,9 @@ const BooksList = () => {
                 setIsLoading(false); // Set loading state to false after error occurs
             }
         };
-    
+
         getBooks();
     }, []);
-    
-
-    async function handleAddToCart(bookId) {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            alert('Please log in first');
-            navigate('/login');
-            return;
-        }
-
-        try {
-            const token = localStorage.getItem('token');
-            const userId = localStorage.getItem('userId');
-            const response = await fetch('http://localhost/api/cart/create.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    book_id: bookId,
-                    quantity: 1
-                }),
-            });
-            if (response.ok) {
-                alert("Book added to cart successfully!");
-                // console.log(userId);
-            } else {
-                throw new Error('Failed to add book to cart');
-            }
-        } catch (error) {
-            console.error(error.message);
-        }
-    }
 
     const handleFilterChange = (event) => {
         const inputValue = event.target.value.toLowerCase();
@@ -87,6 +54,7 @@ const BooksList = () => {
     };
 
     return (
+        
         <div>
             <div className="p-4">
                 <div className="bg-grey col-12 mt-3 flex justify-center items-center">
@@ -101,7 +69,7 @@ const BooksList = () => {
                     />
                 </div>
             </div>
-    
+
             {isLoading ? (
                 <div className="flex justify-center items-center h-48">
                     <p>Loading...</p>
@@ -117,32 +85,32 @@ const BooksList = () => {
                                     key={book.id}
                                     className="bg-white shadow-lg rounded-lg overflow-hidden"
                                 >
-                                    <img
+                                    <Link to={`/book/${book.id}`}><img
                                         className="h-56 lg:h-60 w-full object-cover"
                                         src={book.cover_image}
                                         alt=""
-                                    />
+                                    /></Link>
                                     <div className="p-4">
-                                        <h1 className="text-gray-900 font-bold text-xl">{book.title}</h1>
+                                        <h1 className="text-gray-900 font-bold text-xl"><Link to={`/book/${book.id}`}>{book.title}</Link></h1>
                                         <p className="mt-2 text-gray-600 text-sm">Author: {book.author}</p>
                                         <div className="flex items-center justify-between mt-3">
                                             <h1 className="text-gray-6 font-bold text-l">
                                                 UG {Number(book.price).toLocaleString()}
                                             </h1>
-                                            <button className="px-3 py-2 bg-indigo-500 text-white font-semibold rounded-md"
-                                                onClick={() => handleAddToCart(book.id)}
-                                            >
-                                                Add to Cart
-                                            </button>
+                                            <AddtoCart bookId={book.id}/>
                                         </div>
                                     </div>
                                 </div>
                             ))
                         ) : (
-                            <div
-                                className="bg-white shadow-lg rounded-lg overflow-hidden"
-                            >
-                                <p>No books to list</p>
+                            <div class="items-center justify-center p-12 w-full">
+                                <div class="flex h-full flex-col bg-white shadow-xl">
+                                    <div class="flex-1 px-4 py-6 sm:px-6">
+                                        <div class="flex items-start justify-center">
+                                            <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">No books to list</h2>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         )
                     )}
@@ -150,9 +118,9 @@ const BooksList = () => {
             )}
         </div>
     );
-    
+
 };
 
 export default BooksList;
 
-                   
+

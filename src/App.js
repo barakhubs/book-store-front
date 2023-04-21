@@ -9,6 +9,7 @@ import Logout from './Views/Logout';
 import CartList from './Views/Cart';
 import Footer from './Components/Footer';
 import OrderList from './Views/Order';
+import SingleBook from './Views/SingleBook';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/confirm" element={<AccountConfirm />} />*/ }
+        <Route exact path="/book/:id" element={<SingleBook/>} />
         <Route path="/orders" element={<OrderList />} />
         <Route path="/cart" element={<CartList />} /> 
         <Route path="/logout" element={<Logout />} />
